@@ -1,0 +1,8 @@
+<div class="text-sm">
+    <!-- <p>name:{{pokemon.name}}</p> -->
+    <p>height:{{pokemon.height}}</p>
+    <p>stats:</p>
+        <ul *ngFor="let stat of pokemon.stats" >
+            <li>{{stat.stat.name}}:{{100*stat.base_stat/100}}</li>
+        </ul>
+</div>

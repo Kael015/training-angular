@@ -1,0 +1,30 @@
+<div class="pokemon-list-wrapper m-2 flex-col  items-center justify-center mb-4">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5" *ngIf="selectPokemon">
+        <div *ngFor="let pokemon of paginationPokemonList" (click)="selectPokemon(pokemon.url)"
+            class="p-4 transition-all transform rounded shadow cursor-pointer hover:shadow-xl hover:scale-105">
+            <div className='pokemon mt-10 flex items-center justify-center'> 
+                <div className='pokemon-name text-lg font-bold text-center mb-3 tracking-widest capitalize hover:text-blue-800'>{{pokemon.name}}</div>
+                <div class="flex flex-row justify-between"> 
+                    <img className='pokemon-img hover:bg-yellow-100 h-52 w-52 border-solid border-2' src="{{pokemon.image}}"/>
+                </div>
+            </div>
+        </div>
+        <div *ngFor="let pokemon of paginationPokemonList" (click)="selectPokemon(pokemon.url)"
+            class="p-4 transition-all transform rounded shadow cursor-pointer hover:shadow-xl hover:scale-105">
+            <div className='pokemon mt-10 flex items-center justify-center'> 
+                <div className='pokemon-name text-lg font-bold text-center mb-3 tracking-widest capitalize hover:text-blue-800'>{{pokemon.name}}</div>
+                <div class="flex flex-row justify-between"> 
+                    <img className='pokemon-img hover:bg-yellow-100 h-52 w-52 border-solid border-2' src="{{pokemon.image}}"/>
+                </div>
+                <div *ngIf="selectedPokemon[1] === pokemon.name">
+                    <app-pokemon-detail [pokemon]="selectedPokemon"></app-pokemon-detail>
+                </div>
+            </div>
+        </div>            
+    </div>
+    <div class="controls w-screen flex items-center justify-center gap-4 mt-8">
+        <button class='pr-1 pl-1 text-xl text-white bg-red-700 w-20 border-none rounded-lg h-8' [disabled]="currentPage === 1" (click)="prevPage()">Prev</button>
+        <span>Page {{ currentPage }} of {{ totalPage }}</span>
+        <button class='pr-1 pl-1 text-xl text-white bg-red-700 w-20 border-none rounded-lg h-8' [disabled]="currentPage === totalPage" (click)="nextPage()">Next</button>
+    </div>
+</div>
