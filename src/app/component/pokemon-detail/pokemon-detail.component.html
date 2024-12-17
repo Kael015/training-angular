@@ -1,8 +1,85 @@
-<div class="text-sm">
-    <!-- <p>name:{{pokemon.name}}</p> -->
-    <p>height:{{pokemon.height}}</p>
-    <p>stats:</p>
-        <ul *ngFor="let stat of pokemon.stats" >
-            <li>{{stat.stat.name}}:{{100*stat.base_stat/100}}</li>
-        </ul>
+<div class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div
+    class="max-w-md rounded-lg shadow-lg bg-white overflow-hidden items-center w-full"
+  >
+    <img
+      src="{{ detailPokemon.sprites.front_default }}"
+      alt="Pokemon Image"
+      class="w-full"
+    />
+    <div class="p-6">
+      <h2 class="text-2xl font-bold text-gray-800 text-center">
+        {{ detailPokemon.name }}
+      </h2>
+
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="flex flex-col items-center">
+          <span class="text-gray-500 text-sm">Type</span>
+          <span class="text-green-600 font-semibold"
+            >{{ detailPokemon.types[0].type.name }} /
+            {{ detailPokemon.types[1].type.name }}</span
+          >
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-gray-500 text-sm">Height</span>
+          <span class="text-gray-800 font-semibold"
+            >{{ detailPokemon.height }} m</span
+          >
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-gray-500 text-sm">Weight</span>
+          <span class="text-gray-800 font-semibold"
+            >{{ detailPokemon.weight }} kg</span
+          >
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-gray-500 text-sm">Base Experience</span>
+          <span class="text-gray-800 font-semibold">64</span>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">
+          Evolution Chain
+        </h3>
+        <div
+          class="flex items-center space-x-4 jus"
+          *ngFor="let evolution of evolutionChain"
+        >
+          <div class="flex flex-col items-center">
+            <img src="{{ evolution.image.__zone_symbol__value }}" class="w-16 h-16 object-cover" />
+            <span class="text-gray-800 text-sm">{{
+              evolution.currentEvolution.species.name
+            }}</span>
+          </div>
+          <!-- <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-6 h-6 text-gray-400"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M13.5 4.5L20.25 12m0 0l-6.75 7.5M20.25 12H3.75"
+            />
+          </svg> -->
+        </div>
+      </div>
+
+      <button
+        class="mt-6 w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition ease-in-out" (click)="buyCard()"
+      >
+        Buy Card
+      </button>
+    </div>
+  </div>
 </div>
+<app-pokemon-modal-form
+  [modalOpen]="modalOpen"
+  [detailPokemon]="detailPokemon"
+  [evolutionChain]="evolutionChain"
+  (dataModalOpen)="closeModal($event)"
+></app-pokemon-modal-form>

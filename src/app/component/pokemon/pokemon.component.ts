@@ -12,7 +12,7 @@ export class PokemonComponent {
   pokemonList: any[] = [];
   filteredPokemonList: any[] = [];
   paginationPokemonList: any[] = [];
-  selectedPokemon: any[] = [];
+  selectedPokemon: any= null;
   theme: 'light' | 'dark' = 'light';
   filter: string = '';
   selectedElement: string = '';
@@ -20,6 +20,7 @@ export class PokemonComponent {
   currentPage: number = 1;
   itemPerPage: number = 10;
   totalPage: number = 0;
+  modalOpen: boolean = false;
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -79,6 +80,11 @@ export class PokemonComponent {
 
   async selectPokemon(url: string) {
     this.selectedPokemon = await this.pokemonService.getPokemonDetail(url);
+    this.modalOpen = true
     console.log(this.selectedPokemon)
+  }
+
+  closeModal(isOpen: boolean) {
+    this.modalOpen = isOpen
   }
 }
